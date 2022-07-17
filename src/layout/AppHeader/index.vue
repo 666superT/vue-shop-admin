@@ -7,6 +7,7 @@
         </el-icon>
         <span>嗷嗷编程</span>
       </div>
+      <!-- 开合导航栏 -->
       <el-button
         v-if="!$store.getters.isCollapse"
         color="#4338ca"
@@ -21,23 +22,55 @@
         style="height: 100%; border-radius: 0; font-size: 16px"
         @click="hanndleIsCollapse"
       ></el-button>
-      <el-button
-        color="#4338ca"
-        icon="Refresh"
-        style="height: 100%; border-radius: 0; font-size: 16px"
-      ></el-button>
+
+      <!-- 刷新 -->
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="刷新"
+        placement="bottom"
+      >
+        <el-button
+          color="#4338ca"
+          icon="Refresh"
+          style="height: 100%; border-radius: 0; font-size: 16px"
+          @click.stop="handleRefresh"
+        ></el-button>
+      </el-tooltip>
     </div>
     <div class="right">
-      <el-button
-        color="#4338ca"
-        icon="FullScreen"
-        style="
-          height: 100%;
-          border-radius: 0;
-          font-size: 16px;
-          margin-right: 20px;
-        "
-      ></el-button>
+      <!-- 全屏 -->
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="全屏"
+        placement="bottom"
+      >
+        <el-button
+          v-if="!fullscreen"
+          color="#4338ca"
+          icon="FullScreen"
+          style="
+            height: 100%;
+            border-radius: 0;
+            font-size: 16px;
+            margin-right: 20px;
+          "
+          @click.stop="allShow"
+        ></el-button>
+        <el-button
+          v-else
+          color="#4338ca"
+          icon="Aim"
+          style="
+            height: 100%;
+            border-radius: 0;
+            font-size: 16px;
+            margin-right: 20px;
+          "
+          @click.stop="allShow"
+        ></el-button>
+      </el-tooltip>
       <el-avatar :size="30" :src="userInfo.avatar" style="margin-right: 10px" />
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
@@ -56,11 +89,12 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { logOut } from '../../api/login'
 import { useRouter } from 'vue-router'
+import screenfull from 'screenfull'
 
 const store = useStore()
 const router = useRouter()
@@ -107,6 +141,23 @@ function handleLoginOut() {
 function hanndleIsCollapse() {
   store.commit('login/UP_ISCOLLAPSE')
 }
+
+// 刷新
+function handleRefresh() {
+  router.go(0)
+}
+
+// 全屏
+let fullscreen = ref(false)
+function allShow() {
+  screenfull.toggle()
+  fullscreen.value = !fullscreen.value
+}
+// 监听是否全屏
+screenfull.on('change', () => {
+  // console.log('当前是否是全屏', screenfull.isFullscreen)
+  fullscreen.value = screenfull.isFullscreen
+})
 </script>
 
 <style lang="scss" scoped>

@@ -42,11 +42,11 @@
 }
 .op {
   animation-name: op;
-  animation-duration: 0.75s;
+  animation-duration: 1s;
 }
 .cl {
   animation-name: cl;
-  animation-duration: 0.75s;
+  animation-duration: 1s;
 }
 @keyframes op {
   0% {

@@ -1,51 +1,51 @@
 <template>
-  <div class='index'>
+  <div class="index">
     <el-row>
-      <el-col :span='16'>
+      <el-col :span="16">
         <h1>欢迎光临</h1>
       </el-col>
-      <el-col :span='8'>
-        <div class='form-box'>
+      <el-col :span="8">
+        <div class="form-box">
           <h1>欢迎回来</h1>
-          <div class='title'>
+          <div class="title">
             <span></span>
             <span>账号密码登录</span>
             <span></span>
           </div>
 
           <el-form
-            ref='LoginForm'
-            :model='loginForm'
-            :rules='loginFormRoles'
-            class='demo-form-inline'
+            ref="LoginForm"
+            :model="loginForm"
+            :rules="loginFormRoles"
+            class="demo-form-inline"
           >
-            <el-form-item prop='username'>
+            <el-form-item prop="username">
               <el-input
-                v-model='loginForm.username'
-                placeholder='请输入用户名'
-                prefix-icon='User'
+                v-model.trim="loginForm.username"
+                placeholder="请输入用户名"
+                prefix-icon="User"
               />
             </el-form-item>
-            <el-form-item prop='password'>
+            <el-form-item prop="password">
               <el-input
-                v-model='loginForm.password'
-                placeholder='请输入密码'
-                prefix-icon='Lock'
+                v-model.trim="loginForm.password"
+                placeholder="请输入密码"
+                prefix-icon="Lock"
                 show-password
               />
             </el-form-item>
             <el-form-item>
               <el-button
-                style='
+                style="
                   background: #6366f1;
                   width: 100%;
                   border-radius: 25px;
                   color: white;
-                '
-                @click='handleLoginSubmit'
-              >登录
-              </el-button
-              >
+                "
+                :loading="showLoding"
+                @click="handleLoginSubmit"
+                >登录
+              </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -68,6 +68,8 @@ const loginForm = reactive({
   password: 'admin'
 })
 
+let showLoding = ref(false)
+
 const LoginForm = ref('')
 
 const loginFormRoles = reactive({
@@ -88,10 +90,11 @@ const loginFormRoles = reactive({
 })
 
 // 登录
-function handleLoginSubmit () {
+function handleLoginSubmit() {
   LoginForm.value.validate(async (valid) => {
     // console.log(valid)
     if (valid) {
+      showLoding.value = true
       try {
         const res = await store.dispatch('login/handleLogin', loginForm)
         if (!res) return
@@ -103,13 +106,15 @@ function handleLoginSubmit () {
         })
       } catch (e) {
         console.log(e)
+      } finally {
+        showLoding.value = false
       }
     }
   })
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .index {
   height: 100%;
 
