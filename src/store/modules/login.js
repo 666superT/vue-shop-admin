@@ -3,12 +3,20 @@ import storage from '../../utils/storage'
 export default {
   namespaced: true,
   state: {
-    token: storage.getItem('token') || ''
+    token: storage.getItem('token') || '',
+    userInfo: '',
+    isCollapse: false
   },
   mutations: {
     SET_TOKEN(state, params) {
       state.token = params
       storage.setItem('token', params)
+    },
+    SET_USER_INFO(state, params) {
+      state.userInfo = params
+    },
+    UP_ISCOLLAPSE(state) {
+      state.isCollapse = !state.isCollapse
     }
   },
   actions: {
@@ -20,7 +28,9 @@ export default {
     },
     async getUserInfo({ commit }) {
       const res = await getUserInfo()
-      console.log(res)
+      // console.log(res)
+      commit('SET_USER_INFO', res)
+      return res
     }
   }
 }

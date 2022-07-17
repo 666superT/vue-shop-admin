@@ -1,0 +1,45 @@
+<template>
+  <el-container>
+    <el-header>
+      <app-header></app-header>
+    </el-header>
+    <el-container>
+      <el-aside>
+        <app-aside></app-aside>
+      </el-aside>
+      <el-main>
+        <app-main></app-main>
+      </el-main>
+    </el-container>
+  </el-container>
+</template>
+
+<script setup>
+import AppAside from './AppAside'
+import AppMain from './AppMain'
+import AppHeader from './AppHeader'
+</script>
+
+<style lang="scss" scoped>
+.el-header {
+  width: 100%;
+  background: #4338ca;
+  height: 64px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+.el-container {
+  padding-top: 32px;
+  height: 100%;
+  .el-aside {
+    width: auto;
+    background: #fff;
+    height: 100%;
+    overflow: auto;
+  }
+  .el-main {
+    background: #e5e7eb;
+  }
+}
+</style>
