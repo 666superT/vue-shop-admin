@@ -98,7 +98,7 @@ function handleLoginOut() {
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '已取消退出登录'
+        message: '退出登录失败'
       })
     })
 }
