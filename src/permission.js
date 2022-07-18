@@ -22,13 +22,12 @@ router.beforeEach(async (to, from, next) => {
             userInfo.menus
           )
           console.log(routes)
-          // if (routes) {
-          //   routes.forEach((item) => {
-          //     router.addRoute(item)
-          //   })
-          //   return next(to.path)
-          // }
-          next()
+          if (routes) {
+            routes.forEach((item) => {
+              router.addRoute('layout', item)
+            })
+            return next(to.path)
+          }
         } else {
           next('/login')
         }

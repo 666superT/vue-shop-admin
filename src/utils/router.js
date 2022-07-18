@@ -1,33 +1,29 @@
-/**
- * 过滤出合适的路由数组
- * @param {*} menus
- */
-export default function filtersMenus(menus) {
-  // console.log('过滤器前==》', menus)
-  const menu = generateMenu(menus)
-  console.log('过滤器后=>', menu)
-  // const routes = handleGetRoutes(menu)
-  // console.log(routes)
-
-  return menu
+export default function filterRoutes(params) {
+  // console.log(params)
+  const newRoutes = []
+  params.forEach((item) => {
+    item.child.forEach((v) => {
+      const routes = menuRoutes(v)
+      newRoutes.push(routes)
+    })
+  })
+  return newRoutes
 }
 
 /**
- * 去除没用的children
+ * 把所有菜单数据过滤成路由数据
  */
-const generateMenu = (menus) => {
-  for (let i = 0; i < menus.length; i++) {
-    if ((menus[i].child && menus[i].child.length <= 0) || !menus[i].icon) {
-      delete menus[i].child
-    }
-    if (menus[i].child && menus[i].child.length > 0 && menus[i].icon) {
-      generateMenu(menus[i].child)
+function menuRoutes(v) {
+  if (!v) return null
+  const route = {
+    path: v.frontpath,
+    name: v.icon,
+    meta: {
+      title: v.name,
+      icon: v.icon,
+      desc: v.desc
     }
   }
-  return menus
+  route.component = () => import(`../views/${v.desc}`)
+  return route
 }
-
-/**
- * 把过滤好的数组过滤成路由信息
- */
-// function handleGetRoutes() {}

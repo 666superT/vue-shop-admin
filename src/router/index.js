@@ -8,6 +8,19 @@ const routes = [
     component: () => import('../views/login')
   },
   {
+    path: '/layout',
+    name: 'layout',
+    component: layout,
+    redirect: '/',
+    children: [
+      {
+        path: '/',
+        name: 'index',
+        component: () => import('../views/index')
+      }
+    ]
+  },
+  {
     path: '/404',
     name: '404',
     component: () => import('../views/404')
@@ -15,19 +28,6 @@ const routes = [
   {
     path: '/:catchAll(.*)',
     redirect: '/404'
-  },
-  {
-    path: '/',
-    name: 'layout',
-    component: layout,
-    redirect: '/goods/list',
-    children: [
-      {
-        path: '/goods/list',
-        name: 'index',
-        component: () => import('../views/index')
-      }
-    ]
   }
 ]
 

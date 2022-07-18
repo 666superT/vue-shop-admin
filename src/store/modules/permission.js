@@ -1,4 +1,5 @@
-import filtersMenus from '../../utils/router'
+import filtersMenus from '../../utils/menu'
+import filterRoutes from '@/utils/router'
 export default {
   namespaced: true,
   state: {
@@ -14,8 +15,12 @@ export default {
   actions: {
     filterRoutes({ commit }, menus) {
       const menu = filtersMenus(menus)
-      console.log('111', menu)
+      // console.log('111', menu)
       commit('SET_MENU_LIST', menu)
+
+      const route = filterRoutes(menu)
+      // console.log(route)
+      return route
     }
   }
 }

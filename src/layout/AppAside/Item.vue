@@ -5,8 +5,8 @@
         <!-- <svg-icon :icon="props.item.icon"></svg-icon> -->
         <el-button
           :icon="props.item.icon"
-          style="border: none; background: none; padding: 0"
           size="small"
+          style="border: none; background: none; padding: 0"
         ></el-button>
         <span>{{ props.item.name }}</span>
       </template>
@@ -17,8 +17,8 @@
       <template #title>
         <el-button
           :icon="props.item.icon"
-          style="border: none; background: none; padding: 0"
           size="small"
+          style="border: none; background: none; padding: 0"
         ></el-button>
         <span>{{ props.item.name }}</span>
       </template>

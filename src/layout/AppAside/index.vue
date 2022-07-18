@@ -1,16 +1,16 @@
 <template>
   <el-menu
-    default-active="2"
-    :collapse="$store.getters.isCollapse"
-    :style="{ width: !$store.getters.isCollapse ? '250px' : '64px' }"
-    :collapse-transition="false"
     :class="$store.getters.isCollapse ? 'cl' : 'op'"
-    active-text-color="#409eff"
-    text-color="#303133"
-    unique-opened
+    :collapse='$store.getters.isCollapse'
+    :collapse-transition='false'
+    :default-active='$route.path'
+    :style="{ width: !$store.getters.isCollapse ? '250px' : '64px' }"
+    active-text-color='#409eff'
     router
+    text-color='#303133'
+    unique-opened
   >
-    <Item v-for="v in menu" :key="v.name" :item="v"></Item>
+    <Item v-for='v in menu' :key='v.name' :item='v'></Item>
   </el-menu>
 </template>
 
@@ -27,18 +27,21 @@ const menu = computed(() => {
 // console.log('888', menu)
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .el-menu {
   border-right: none;
 }
+
 .op {
   animation-name: op;
   animation-duration: 0.4s;
 }
+
 .cl {
   animation-name: cl;
   animation-duration: 0.4s;
 }
+
 @keyframes op {
   0% {
     width: 64px;
@@ -47,6 +50,7 @@ const menu = computed(() => {
     width: 250px;
   }
 }
+
 @keyframes cl {
   0% {
     width: 250px;

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+
 const http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
@@ -17,6 +18,7 @@ http.interceptors.request.use(
     return Promise.reject(err)
   }
 )
+
 // 响应拦截
 http.interceptors.response.use(
   (res) => {

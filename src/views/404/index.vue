@@ -1,5 +1,8 @@
 <template>
-  <div class="">404</div>
+  <div class="">
+    <el-button type="primary" @click="$router.go(-1)">返回</el-button>
+    404
+  </div>
 </template>
 
 <script setup></script>
