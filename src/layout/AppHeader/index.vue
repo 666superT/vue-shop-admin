@@ -122,7 +122,8 @@ function handleLoginOut() {
   })
     .then(async () => {
       const res = await logOut()
-      store.commit('login/SET_TOKEN')
+      store.commit('login/SET_TOKEN', '')
+      store.dispatch('tags/handleCloseAll')
       router.push('/login')
       ElMessage({
         type: 'success',

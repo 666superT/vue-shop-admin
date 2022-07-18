@@ -8,6 +8,9 @@
         <app-aside></app-aside>
       </el-aside>
       <el-main>
+        <div class="tagbox">
+          <TagsView></TagsView>
+        </div>
         <app-main></app-main>
       </el-main>
     </el-container>
@@ -18,6 +21,7 @@
 import AppAside from './AppAside'
 import AppMain from './AppMain'
 import AppHeader from './AppHeader'
+import TagsView from '../components/TagsView.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -39,7 +43,9 @@ import AppHeader from './AppHeader'
     overflow: auto;
   }
   .el-main {
-    background: #e5e7eb;
+    width: 100%;
+    background: #f3f4f6;
+    padding: 0 10px;
   }
 }
 </style>

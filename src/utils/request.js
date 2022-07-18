@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import { ElMessage } from 'element-plus'
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -25,6 +26,9 @@ http.interceptors.response.use(
     return res.data.data
   },
   (err) => {
+    if (err.name === 'AxiosError') {
+      ElMessage.error('请求超时！')
+    }
     return Promise.reject(err)
   }
 )
