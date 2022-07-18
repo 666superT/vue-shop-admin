@@ -1,12 +1,21 @@
 import filtersMenus from '../../utils/router'
 export default {
   namespaced: true,
-  state: {},
-  mutations: {},
+  state: {
+    menuList: []
+  },
+  mutations: {
+    SET_MENU_LIST(state, menu) {
+      menu.forEach((v) => {
+        state.menuList.push(v)
+      })
+    }
+  },
   actions: {
     filterRoutes({ commit }, menus) {
-      // console.log(menus)
-      filtersMenus(menus)
+      const menu = filtersMenus(menus)
+      console.log('111', menu)
+      commit('SET_MENU_LIST', menu)
     }
   }
 }

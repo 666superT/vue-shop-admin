@@ -5,36 +5,27 @@
     :style="{ width: !$store.getters.isCollapse ? '250px' : '64px' }"
     :collapse-transition="false"
     :class="$store.getters.isCollapse ? 'cl' : 'op'"
+    active-text-color="#409eff"
+    text-color="#303133"
+    unique-opened
+    router
   >
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group title="Group One">
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item one</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>item four</template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3" disabled>
-      <el-icon><document /></el-icon>
-      <span>Navigator Three</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon><setting /></el-icon>
-      <span>Navigator Four</span>
-    </el-menu-item>
+    <Item v-for="v in menu" :key="v.name" :item="v"></Item>
   </el-menu>
 </template>
 
-<script setup></script>
+<script setup>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
+import Item from './Item'
+
+const store = useStore()
+
+const menu = computed(() => {
+  return store.getters.menuList
+})
+// console.log('888', menu)
+</script>
 
 <style lang="scss" scoped>
 .el-menu {
@@ -42,11 +33,11 @@
 }
 .op {
   animation-name: op;
-  animation-duration: 1s;
+  animation-duration: 0.4s;
 }
 .cl {
   animation-name: cl;
-  animation-duration: 1s;
+  animation-duration: 0.4s;
 }
 @keyframes op {
   0% {
