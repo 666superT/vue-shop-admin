@@ -19,12 +19,14 @@ export default {
         storage.setItem('tagList', state.tagList)
       }
     },
+    // 删除单个
     DEL_TAG(state, path) {
-      state.tagList = state.tagList.filter((v) => {
+      state.tagList = state.tagList.filter((v, i) => {
         return v.path !== path
       })
       storage.setItem('tagList', state.tagList)
     },
+    // 删除其他
     HANDLE_CLOSE_OTHER(state, path) {
       state.tagList = state.tagList.filter((v) => {
         return v.path === path
@@ -37,6 +39,7 @@ export default {
 
       storage.setItem('tagList', state.tagList)
     },
+    // 删除所有
     HANDLE_CLOSE_ALL(state) {
       state.tagList = state.tagList.filter((v) => {
         return v.path === '/'
@@ -53,7 +56,7 @@ export default {
       commit('DEL_TAG', path)
     },
     handleCloseOther({ commit }, path) {
-      console.log(path)
+      // console.log(path)
       commit('HANDLE_CLOSE_OTHER', path)
     },
     handleCloseAll({ commit }) {

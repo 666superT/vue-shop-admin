@@ -20,14 +20,11 @@ const routes = [
       }
     ]
   },
+  // TODO刷新页面找不到路由会跳404、原因可能是会先加载404页面、要把*跳404在动态添加路由时添加
   {
     path: '/404',
     name: '404',
     component: () => import('../views/404')
-  },
-  {
-    path: '/:catchAll(.*)',
-    redirect: '/404'
   }
 ]
 

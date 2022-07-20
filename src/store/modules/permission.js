@@ -20,6 +20,10 @@ export default {
 
       const route = filterRoutes(menu)
       // console.log(route)
+      route.push({
+        path: '/:catchAll(.*)',
+        redirect: '/404'
+      })
       return route
     }
   }

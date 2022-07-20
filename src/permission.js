@@ -21,7 +21,7 @@ router.beforeEach(async (to, from, next) => {
             'permission/filterRoutes',
             userInfo.menus
           )
-          console.log(routes)
+          console.log('路由数据=>', routes)
           if (routes) {
             routes.forEach((item) => {
               router.addRoute('layout', item)

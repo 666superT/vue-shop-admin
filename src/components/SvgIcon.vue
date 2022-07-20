@@ -1,13 +1,13 @@
 <template>
   <!-- 展示svg在线图标 -->
   <div
-    v-if="isExternal"
-    class="svg-icon svg-external-icon"
-    :style="styleExternalIcon"
+    v-if='isExternal'
+    :style='styleExternalIcon'
+    class='svg-icon svg-external-icon'
   ></div>
   <!-- 展示svg本地图标 -->
-  <svg v-else class="svg-icon" :class="props.className" aria-hidden="true">
-    <use :xlink:href="iconName" />
+  <svg v-else :class='props.className' aria-hidden='true' class='svg-icon'>
+    <use :xlink:href='iconName' />
   </svg>
 </template>
 
@@ -46,13 +46,13 @@ const iconName = computed(() => {
 .svg-icon {
   width: 1em;
   height: 1em;
-  background: red;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
   /* mask : url(https://res.lgdsunday.club/user.svg) no-repeat 50% 50%;
   -webkit-mask: url(https://res.lgdsunday.club/user.svg) no-repeat 50% 50%; */
 }
+
 .svg-external-icon {
   background-color: currentColor;
   mask-size: cover !important;
