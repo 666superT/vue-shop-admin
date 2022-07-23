@@ -12,6 +12,6 @@
   padding: 0 20px;
   margin-top: 55px;
   box-sizing: border-box;
-  overflow: hidden;
+  // overflow: hidden;
 }
 </style>

@@ -46,7 +46,7 @@ import TagsView from '../components/TagsView.vue'
   .el-main {
     width: 100%;
     background: #f3f4f6;
-    padding: 0 10px;
+    padding: 0 10px 20px;
   }
 }
 </style>

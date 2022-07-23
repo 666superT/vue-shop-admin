@@ -1,19 +1,19 @@
 <template>
-  <el-row :gutter="20">
-    <el-col v-for="(item, index) in panels" :key="index" :span="6">
-      <el-card class="box-card" shadow="hover">
+  <el-row :gutter='20'>
+    <el-col v-for='(item, index) in panels' :key='index' :span='6'>
+      <el-card class='box-card' shadow='hover'>
         <template #header>
-          <div class="card-header">
+          <div class='card-header'>
             <span>{{ item.title }}</span>
-            <el-tag :type="item.unitColor" class="mx-1" effect="plain">
+            <el-tag :type='item.unitColor' class='mx-1' effect='plain'>
               {{ item.unit }}
             </el-tag>
           </div>
         </template>
-        <div class="content">
-          <span class="value">{{ item.value }}</span>
-          <span class="border"></span>
-          <div class="sub-title">
+        <div class='content'>
+          <span class='value'>{{ item.value }}</span>
+          <span class='border'></span>
+          <div class='sub-title'>
             <span>{{ item.subTitle }}</span>
             <span>{{ item.subValue }}</span>
           </div>
@@ -22,15 +22,15 @@
     </el-col>
   </el-row>
 
-  <el-row :gutter="20" class="sub-el-row">
-    <el-col v-for="(item, index) in smallMenus" :key="index" :span="3">
-      <router-link :to="item.path">
-        <el-card shadow="hover">
-          <div class="small-menu">
-            <div :style="{ color: item.color }">
-              <svg-icon :icon="item.icon"></svg-icon>
+  <el-row :gutter='20' class='sub-el-row'>
+    <el-col v-for='(item, index) in smallMenus' :key='index' :span='3'>
+      <router-link :to='item.path'>
+        <el-card shadow='hover'>
+          <div class='small-menu'>
+            <div :style='{ color: item.color }'>
+              <svg-icon :icon='item.icon'></svg-icon>
             </div>
-            <span class="title">{{ item.title }}</span>
+            <span class='title'>{{ item.title }}</span>
           </div>
         </el-card>
       </router-link>
@@ -38,58 +38,59 @@
   </el-row>
 
   <!--  可视化-->
-  <el-row :gutter="20" class="sub-el-row">
-    <el-col :span="12">
-      <el-card class="box-card">
+  <el-row :gutter='20' class='sub-el-row'>
+    <el-col :span='12'>
+      <el-card class='box-card'>
         <template #header>
-          <div class="card-header">
+          <div class='card-header'>
             <span>订单统计</span>
-            <div class="card-button-box">
+            <div class='card-button-box'>
               <el-check-tag
-                v-for="(v, i) in checkTagList"
-                :key="i"
-                :checked="v.status"
-                @change="handleDateChange(v.method, i)"
-                >{{ v.title }}</el-check-tag
+                v-for='(v, i) in checkTagList'
+                :key='i'
+                :checked='v.status'
+                @change='handleDateChange(v.method, i)'
+              >{{ v.title }}
+              </el-check-tag
               >
             </div>
           </div>
         </template>
-        <div ref="main" id="main" v-loading="loading"></div>
+        <div id='main' ref='main' v-loading='loading'></div>
       </el-card>
     </el-col>
     <!-- 右侧 -->
-    <el-col :span="12">
-      <el-card class="box-card">
+    <el-col :span='12'>
+      <el-card class='box-card'>
         <template #header>
-          <div class="card-header">
+          <div class='card-header'>
             <span>店铺及商品提示</span>
-            <el-tag type="danger" class="mx-1" effect="plain">
+            <el-tag class='mx-1' effect='plain' type='danger'>
               店铺及商品提示
             </el-tag>
           </div>
         </template>
-        <el-row :gutter="20">
-          <el-col :span="6" v-for="(v, i) in goods" :key="i">
-            <div class="goods-box">
+        <el-row :gutter='20'>
+          <el-col v-for='(v, i) in goods' :key='i' :span='6'>
+            <div class='goods-box'>
               <span>{{ v.value }}</span>
               <span>{{ v.label }}</span>
             </div>
           </el-col>
         </el-row>
       </el-card>
-      <el-card class="box-card" style="margin-top: 20px">
+      <el-card class='box-card' style='margin-top: 20px'>
         <template #header>
-          <div class="card-header">
+          <div class='card-header'>
             <span>交易提示</span>
-            <el-tag type="danger" class="mx-1" effect="plain">
+            <el-tag class='mx-1' effect='plain' type='danger'>
               需要立即处理的交易订单
             </el-tag>
           </div>
         </template>
-        <el-row :gutter="20">
-          <el-col :span="6" v-for="(v, i) in order" :key="i">
-            <div class="goods-box">
+        <el-row :gutter='20'>
+          <el-col v-for='(v, i) in order' :key='i' :span='6'>
+            <div class='goods-box'>
               <span>{{ v.value }}</span>
               <span>{{ v.label }}</span>
             </div>
@@ -168,7 +169,8 @@ const smallMenus = reactive([
  * @returns {Promise<void>}
  */
 let panels = ref()
-async function getHeaderStatistics() {
+
+async function getHeaderStatistics () {
   try {
     const response = await getStatistics1()
     // console.log(response)
@@ -182,12 +184,14 @@ getHeaderStatistics()
 
 const goods = ref([])
 const order = ref([])
-async function getFootStatistics2() {
+
+async function getFootStatistics2 () {
   const res = await getStatistics2()
   // console.log(res)
   goods.value = res.goods
   order.value = res.order
 }
+
 getFootStatistics2()
 
 // 获取可视化图表数据
@@ -195,11 +199,12 @@ getFootStatistics2()
 // 初始请求
 let loading = ref(false)
 let myChart = ref()
-async function getEatchsData(method) {
+
+async function getEatchsData (method) {
   loading.value = true
   try {
     const res = await getStatistics3(method)
-    console.log(res)
+    // console.log(res)
     let chartDom = document.getElementById('main')
     myChart.value = echarts.init(chartDom)
     let option
@@ -231,15 +236,29 @@ async function getEatchsData(method) {
     loading.value = false
   }
 }
+
 getEatchsData('week')
 
 const checkTagList = reactive([
-  { title: '近1个月', status: false, method: 'month' },
-  { title: '近1周', status: true, method: 'week' },
-  { title: '近24小时', status: false, method: 'hour' }
+  {
+    title: '近1个月',
+    status: false,
+    method: 'month'
+  },
+  {
+    title: '近1周',
+    status: true,
+    method: 'week'
+  },
+  {
+    title: '近24小时',
+    status: false,
+    method: 'hour'
+  }
 ])
+
 // 点击切换
-function handleDateChange(method, i) {
+function handleDateChange (method, i) {
   if (
     myChart.value !== null &&
     myChart.value !== '' &&
@@ -255,7 +274,7 @@ function handleDateChange(method, i) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 #main {
   width: 556px;
   height: 300px;
@@ -316,11 +335,13 @@ function handleDateChange(method, i) {
   background: #f6f6f6;
   padding: 20px 0;
   border-radius: 3px;
+
   span {
     &:nth-child(1) {
       font-size: 1.25rem;
       margin-bottom: 10px;
     }
+
     &:nth-child(2) {
       font-size: 0.75rem;
     }
