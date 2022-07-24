@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="base-table">
     <div class="btn-box">
       <div class="btn-left">
         <el-button v-for="(v, i) in leftBtns" :key="i" :type="v.type">{{
@@ -15,7 +15,7 @@
       :stripe="stripe"
       style="width: 100%"
       :header-cell-style="{ 'text-align': 'center' }"
-      :cell-style="{ 'text-align': 'center' }"
+      :cell-style="{ 'text-align': textAlign }"
     >
       <el-table-column v-if="index" type="index" label="序号" />
       <el-table-column v-if="checkbox" type="selection" />
@@ -41,7 +41,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="pagination">
+    <div class="pagination" v-if="page">
       <el-pagination
         @current-change="handleCurrentChange"
         background
@@ -65,6 +65,11 @@ export default {
     index: Boolean,
     checkbox: Boolean,
     stripe: Boolean,
+    page: Boolean,
+    textAlign: {
+      type: String,
+      default: 'center'
+    },
     tableColumn: {
       type: Array,
       default: () => []
@@ -93,7 +98,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.pagination{
+.pagination {
   display: flex;
   justify-content: space-around;
   margin: 15px 0;

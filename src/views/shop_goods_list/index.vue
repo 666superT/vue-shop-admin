@@ -69,6 +69,7 @@
         :tableData="goodsList"
         :total="total"
         :leftBtns="leftBtns"
+        page
         stripe
         checkbox
       >
@@ -242,7 +243,10 @@ function handleCurrentChange(val) {
 
 // tab栏切换
 function handleTabClick(TabsPaneContext) {
-  console.log(TabsPaneContext.props.name)
+  // console.log(TabsPaneContext.props.name)
+  // console.log(activeName.value)
+  activeName.value = TabsPaneContext.props.name
+  handleGoodsList()
 }
 
 // 重置表单
